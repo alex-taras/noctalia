@@ -1,6 +1,6 @@
 import QtQuick 6.11
-import QtQuick.Controls
-import QtQuick.Shapes
+import QtQuick.Controls 6.11
+import QtQuick.Shapes 6.11
 import qs.Commons
 import qs.Services.UI
 

@@ -1,5 +1,5 @@
 import QtQuick 6.11
-import QtQuick.Controls
+import QtQuick.Controls 6.11
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Pipewire

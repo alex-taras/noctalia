@@ -1,5 +1,5 @@
 import QtQuick 6.11
-import QtQuick.Shapes
+import QtQuick.Shapes 6.11
 import Quickshell
 import Quickshell.Wayland
 

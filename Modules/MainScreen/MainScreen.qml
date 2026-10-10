@@ -1,6 +1,6 @@
 import QtQuick 6.11
-import QtQuick.Controls
-import QtQuick.Effects
+import QtQuick.Controls 6.11
+import QtQuick.Effects 6.11
 import Quickshell
 import Quickshell.Wayland
 import "Backgrounds" as Backgrounds

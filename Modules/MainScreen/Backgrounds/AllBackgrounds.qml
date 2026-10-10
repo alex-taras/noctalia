@@ -1,5 +1,5 @@
 import QtQuick 6.11
-import QtQuick.Shapes
+import QtQuick.Shapes 6.11
 import qs.Commons
 import qs.Services.UI
 import qs.Widgets

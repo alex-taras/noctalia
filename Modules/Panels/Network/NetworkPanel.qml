@@ -1,6 +1,6 @@
 import QtQuick 6.11
-import QtQuick.Controls
-import QtQuick.Layouts
+import QtQuick.Controls 6.11
+import QtQuick.Layouts 6.11
 import Quickshell
 import "../Settings/Tabs/Connections" as WifiPrefs
 import qs.Commons

@@ -1,7 +1,7 @@
 import QtQuick 6.11
-import QtQuick.Controls
-import QtQuick.Effects
-import QtQuick.Layouts
+import QtQuick.Controls 6.11
+import QtQuick.Effects 6.11
+import QtQuick.Layouts 6.11
 import qs.Commons
 import qs.Services.Noctalia
 import qs.Widgets

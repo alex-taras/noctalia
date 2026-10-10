@@ -1,7 +1,7 @@
 import QtQml
 import QtQuick 6.11
-import QtQuick.Controls
-import QtQuick.Layouts
+import QtQuick.Controls 6.11
+import QtQuick.Layouts 6.11
 import "../Helpers/ColorList.js" as ColorList
 import qs.Commons
 import qs.Services.UI
