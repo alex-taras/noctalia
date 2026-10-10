@@ -14,7 +14,12 @@ Singleton {
 
   readonly property int currentVersion: 2
   // Main source URL - plugins from this source keep plain IDs
-  readonly property string mainSourceUrl: "https://github.com/noctalia-dev/noctalia-plugins"
+  readonly property string mainSourceUrl: "https://github.com/alex-taras/legacy-v4-plugins"
+  // Previous main source URLs (upstream), migrated to mainSourceUrl
+  readonly property var legacyMainSourceUrls: [
+    "https://github.com/noctalia-dev/noctalia-plugins",
+    "https://github.com/noctalia-dev/legacy-v4-plugins"
+  ]
 
   Component.onCompleted: {
     ensurePluginsDirectory();
@@ -120,7 +125,7 @@ Singleton {
         root.pluginSources = [
           {
             "name": "Noctalia Plugins",
-            "url": "https://github.com/noctalia-dev/noctalia-plugins",
+            "url": "https://github.com/alex-taras/legacy-v4-plugins",
             "enabled": true
           }
         ];
@@ -141,7 +146,7 @@ Singleton {
       root.pluginSources = [
             {
               "name": "Noctalia Plugins",
-              "url": "https://github.com/noctalia-dev/noctalia-plugins",
+              "url": "https://github.com/alex-taras/legacy-v4-plugins",
               "enabled": true
             }
           ];
@@ -178,6 +183,39 @@ Singleton {
         needsSave = true;
         break;
       }
+    }
+
+    // Migration: upstream main source -> fork main source (states and sources)
+    for (var stateId in root.pluginStates) {
+      if (root.legacyMainSourceUrls.indexOf(root.pluginStates[stateId].sourceUrl) !== -1) {
+        root.pluginStates[stateId].sourceUrl = root.mainSourceUrl;
+        needsSave = true;
+      }
+    }
+    var migratedSources = [];
+    var seenUrls = {};
+    var urlsMigrated = false;
+    for (var k = 0; k < root.pluginSources.length; k++) {
+      var src = root.pluginSources[k];
+      var srcUrl = root.legacyMainSourceUrls.indexOf(src.url) !== -1 ? root.mainSourceUrl : src.url;
+      if (srcUrl !== src.url) {
+        urlsMigrated = true;
+      }
+      if (seenUrls[srcUrl]) {
+        urlsMigrated = true;
+        continue;
+      }
+      seenUrls[srcUrl] = true;
+      migratedSources.push({
+                             name: src.name,
+                             url: srcUrl,
+                             enabled: src.enabled
+                           });
+    }
+    if (urlsMigrated) {
+      root.pluginSources = migratedSources;
+      needsSave = true;
+      Logger.i("PluginRegistry", "Migrated main plugin source to", root.mainSourceUrl);
     }
 
     // Migration: rename "Official Noctalia Plugins" -> "Noctalia Plugins"
